@@ -1,0 +1,77 @@
+Dear Syakir,
+
+Berikut terkirim materi Form untuk Angular dan soal untuk tugas 3 Angular.
+
+Tugas :
+Membuat aplikasi pendaftaran member sederhana.
+
+1. Tampilan awal dari aplikasi ini adalah browse data member dimana :
+a. Pada bagian atas ada dua tombol yaitu Browse dan Input
+Button akan tertandai aktif/highlight sesuai dengan apa isi
+dari layar saat ini.
+b. Bila tombol Input ditekan, akan menampilkan form input
+c. Pada body tampil table yang berisi member-member yang ada
+dimana data yang ditampilkan adalah :
+- email
+- first name
+- last name
+- address
+- phone number
+d. Di setiap row pada daftar member tersebut memiliki dua button
+yang diperuntukkan :
+- edit
+Bila button ini ditekan maka akan menampilkan form input
+yang berisi dengan data yang dipilih ini untuk dapat
+kemudian dilakukan editing.
+- delete
+Bila button ini ditekan maka akan tampil dialog konfirmasi
+untuk menanyakan apakah yakin hendak menghapus.
+
+2. Form Input
+Inputan dari form input adalah :
+
+- e-mail
+- first name
+- last name
+- password
+- repeat password
+- Alamat : (text area)
+- phone number
+
+Form input ini memiliki tombol simpan.
+Syarat-syarat :
+a. Simpan hanya bisa dilakukan kalau semua input sudah terisi
+(tombol simpan enable bila semua inputan sudah terisi.)
+b. e-mail harus berformat email (xxx@xxx.com), bila tidak
+berformat email akan terkena validasi.
+Pesan dari validasi akan muncul di bawahnya, misal :
+wrong email format, dan di inputan tersebut akan diborder
+dengan warna merah.
+c. first name dan last name tidak ada syarat khusus
+d. password
+Harus merupakan kombinasi antara huruf, angka dan karakter
+selain huruf dan angka, di luar itu akan terkena validasi
+(validasi akan muncul di bawahnya dan inputan akan diborder
+dengan warna merah.)
+password minimal 6 karakter, bila kurang dari 6 karakter akan
+terkena validasi (validasi akan muncul di bawahnya dan inputan
+akan diborder dengan warna merah.)
+Bila inputan ini melanggar dua batasan di atas maka di
+bawahnya muncul dua pesan error secara berurutan.
+e. repeat password
+Diperkisa bahwa harus sama dengan password, bila tidak sama
+akan muncul pesan error di bawahnya dan inputan akan diborder
+dengan warna merah.
+f. phone number
+Harus diawali dengan +62, bila tidak akan muncul pesan error
+di bawahnya dan inputan akan diborder dengan warna merah.
+g. Bila simpan dilakukan (tombol simpan ditekan), maka akan
+tampil alert yang menyatakan bahwa : data berhasil disimpan.
+Setelah itu layar akan dibersihkan sehingga dapat digunakan
+untuk melakukan input lagi (jangan langsung ke layar browse).
+
+Foto untuk spesifikasi terlampir.
+
+Terima kasih.
+
+Henrie

@@ -1,3 +1,6 @@
-<p>
-  input works!
-</p>
+<div class="input-form">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" class="ui form">
+    <label for="skuInput">SKU</label>
+    <input type="text" id="skuInput" placeholder="SKU" [formControl]="myForm.controls['sku']"/>
+  </form>
+</div>
