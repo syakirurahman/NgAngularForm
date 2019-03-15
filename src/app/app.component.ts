@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'NgAngularForm';
+  title = 'Angular Form';
+  activePage:string;
+  constructor() { 
+    this.activePage = 'browse';
+  }
+  navigatePage(page:string) {
+    this.activePage = page;
+  }
 }
