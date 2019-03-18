@@ -1,0 +1,24 @@
+.input-form {
+  max-width: 500px;
+  margin:0 auto 50px;
+  .btn-save {
+    background-color:#0074aa;
+    padding:15px 30px;
+    color:#fff;
+    border:0;
+    &:disabled {
+      background-color:#ddd;
+      color:#999;
+    }
+  }
+  .input-field {
+    .input-error {
+      border:1px solid red;
+      color:red;
+    }
+    .msg-error {
+      color:red;
+      padding:3px;
+    }
+  }
+}

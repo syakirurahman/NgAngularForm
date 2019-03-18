@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="main-block" [ngSwitch]="activePage">
-    <div *ngSwitchCase="'browse'"><app-dataview></app-dataview></div>
-    <div *ngSwitchCase="'input'"><app-input></app-input></div>  
+    <div *ngSwitchCase="'browse'"><app-dataview [data]="data"></app-dataview></div>
+    <div *ngSwitchCase="'input'"><app-input (onDataSubmited)="dataSubmited($event)" [dataToEdit]="dataToEdit"></app-input></div>  
   </div>
 </div>

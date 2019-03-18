@@ -1,6 +1,62 @@
 <div class="input-form">
-  <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" class="ui form">
-    <label for="skuInput">SKU</label>
-    <input type="text" id="skuInput" placeholder="SKU" [formControl]="myForm.controls['sku']"/>
+  <form [formGroup]="inputForm" (ngSubmit)="onSubmit(inputForm.value)" class="ui form">
+    <div class="input-field">
+      <label for="email">Email</label>
+      <input type="text" id="email" placeholder="Email" [formControl]="inputForm.controls['email']" [class.input-error]="!inputForm.controls['email'].valid && inputForm.controls['email'].touched"/>
+      <div *ngIf="inputForm.controls['email'].invalid && (inputForm.controls['email'].dirty || inputForm.controls['email'].touched)">
+        <div *ngIf="inputForm.controls['email'].errors.required" class="msg-error">- Email harus diisi!</div>
+        <div *ngIf="inputForm.controls['email'].errors.email" class="msg-error">- Format email harus benar!</div>
+      </div>
+    </div>
+    
+    <div class="input-field">
+      <label for="first_name">First Name</label>
+      <input type="text" id="first_name" placeholder="First Name" [formControl]="inputForm.controls['first_name']" [class.input-error]="!inputForm.controls['first_name'].valid && inputForm.controls['first_name'].touched"/>
+      <div *ngIf="inputForm.controls['first_name'].invalid && (inputForm.controls['first_name'].dirty || inputForm.controls['first_name'].touched)">
+          <div *ngIf="inputForm.controls['first_name'].errors.required" class="msg-error">- First name harus diisi!</div>
+      </div>
+    </div>
+    <div class="input-field">
+      <label for="last_name">Last Name</label>
+      <input type="text" id="last_name" placeholder="Last Name" [formControl]="inputForm.controls['last_name']" [class.input-error]="!inputForm.controls['last_name'].valid && inputForm.controls['last_name'].touched"/>
+      <div *ngIf="inputForm.controls['last_name'].invalid && (inputForm.controls['last_name'].dirty || inputForm.controls['last_name'].touched)">
+          <div *ngIf="inputForm.controls['last_name'].errors.required" class="msg-error">- Last name harus diisi!</div>
+      </div>
+    </div>
+    <div class="input-field">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Password" [formControl]="inputForm.controls['password']" [class.input-error]="!inputForm.controls['password'].valid && inputForm.controls['password'].touched"/>
+      <div *ngIf="inputForm.controls['password'].invalid && (inputForm.controls['password'].dirty || inputForm.controls['password'].touched)">
+        <div *ngIf="inputForm.controls['password'].errors.required" class="msg-error">- Password harus diisi!</div>
+        <div *ngIf="inputForm.controls['password'].errors.minlength" class="msg-error">- Password minimal 6 karakter!</div>
+        <div *ngIf="inputForm.controls['password'].errors.hasNoNumber" class="msg-error">- Password harus berisi angka!</div>
+        <div *ngIf="inputForm.controls['password'].errors.hasNoSpecialChar" class="msg-error">- Password harus berisi karakter spesial!</div>
+      </div>
+    </div>
+    <div class="input-field">
+      <label for="confirm_password">Confirm Password</label>
+      <input type="password" id="confirm_password" placeholder="Confirm Password" [formControl]="inputForm.controls['confirm_password']" [class.input-error]="!inputForm.controls['confirm_password'].valid && inputForm.controls['confirm_password'].touched"/>
+      <div *ngIf="inputForm.controls['confirm_password'].invalid && (inputForm.controls['confirm_password'].dirty || inputForm.controls['confirm_password'].touched)">
+        <div *ngIf="inputForm.controls['confirm_password'].errors.required" class="msg-error">- Confirm Password harus diisi!</div>
+        <div *ngIf="inputForm.controls['confirm_password'].errors.NoPasswordMatch" class="msg-error">- Confirm Password tidak sama dengan Password!</div>
+      </div>  
+    </div>
+    <div class="input-field">
+      <label for="address">Address</label>
+      <textarea id="address" placeholder="Address" [formControl]="inputForm.controls['address']" [class.input-error]="!inputForm.controls['address'].valid && inputForm.controls['address'].touched"></textarea>
+      <div *ngIf="inputForm.controls['address'].invalid && (inputForm.controls['address'].dirty || inputForm.controls['address'].touched)">
+        <div *ngIf="inputForm.controls['address'].errors.required" class="msg-error">- Address harus diisi!</div>
+      </div>  
+    </div>
+    <div class="input-field">
+      <label for="phone_number">Phone Number</label>
+      <input type="text" id="phone_number" placeholder="Phone Number" [formControl]="inputForm.controls['phone_number']" [class.input-error]="!inputForm.controls['phone_number'].valid && inputForm.controls['phone_number'].touched"/>
+      <div *ngIf="inputForm.controls['phone_number'].invalid && (inputForm.controls['phone_number'].dirty || inputForm.controls['phone_number'].touched)">
+        <div *ngIf="inputForm.controls['phone_number'].errors.required" class="msg-error">- Phone Number harus diisi!</div>
+        <div *ngIf="inputForm.controls['phone_number'].errors.isInvalid" class="msg-error">- Phone Number harus diawali dengan +62</div>
+      </div>  
+    </div>
+    <button *ngIf="!inputForm.valid" class="btn btn-save" type="submit" disabled>Save</button>
+    <button *ngIf="inputForm.valid" class="btn btn-save" type="submit">Save</button>
   </form>
 </div>

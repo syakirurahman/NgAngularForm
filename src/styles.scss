@@ -24,3 +24,35 @@ h1,h2,h3,h4,h5,h6 {
     padding:20px;
     margin:0 auto;
 }
+input[type=text], input[type=email], input[type=password], textarea, select {
+    display:block;
+    width:100%;
+    padding:10px 15px;
+    border-radius:3px;
+    border:1px solid #999;
+}
+label {
+    font-weight:600;
+}
+.input-field {
+    margin-bottom: 20px;
+    label {
+        display:block;
+        margin-bottom:5px;
+    }
+}
+.btn {
+    padding:12px 25px;
+    font-weight:bold;
+    border-radius:4px;
+    border:1px solid #999;
+    background-color:#fff;
+    cursor:pointer;
+    display: inline-block;
+    &:focus {
+        outline: none;
+    }
+    &:active {
+        box-shadow:inset 0px -3px 5px 0 rgba(#000,0.2);
+    }
+}
