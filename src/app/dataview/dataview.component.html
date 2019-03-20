@@ -1,3 +1,4 @@
+<div *ngIf="deletedMessage" class="delete-message">Data Berhasil Dihapus!</div>
 <div class="dataview">
   <table class="basic" width="100%">
     <thead>
@@ -11,15 +12,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of dataview; let i = index">
+      <tr *ngFor="let user of data; let i = index">
         <td>{{ user.email }}</td>
         <td>{{ user.first_name }}</td>
         <td>{{ user.last_name }}</td>
         <td>{{ user.address }}</td>
         <td>{{ user.phone_number }}</td>
         <td>
-          <a class="btn btn-action" (click)="editData(user.email)">Edit</a>
-          <a class="btn btn-action" (click)="deleteData(user.email)">Delete</a>
+          <a class="btn btn-action" (click)="editData(user)">Edit</a>
+          <a class="btn btn-action" (click)="deleteData(user)">Delete</a>
         </td>
       </tr>
     </tbody>

@@ -2,7 +2,14 @@
   <form [formGroup]="inputForm" (ngSubmit)="onSubmit(inputForm.value)" class="ui form">
     <div class="input-field">
       <label for="email">Email</label>
-      <input type="text" id="email" placeholder="Email" [formControl]="inputForm.controls['email']" [class.input-error]="!inputForm.controls['email'].valid && inputForm.controls['email'].touched"/>
+      <input 
+        *ngIf="dataToEdit!==null" 
+        readonly type="text" 
+        id="email" placeholder="Email" 
+        [formControl]="inputForm.controls['email']" 
+        [class.input-error]="!inputForm.controls['email'].valid && inputForm.controls['email'].touched"/>
+      <input *ngIf="dataToEdit===null" type="text" id="email" placeholder="Email" [formControl]="inputForm.controls['email']" [class.input-error]="!inputForm.controls['email'].valid && inputForm.controls['email'].touched"/>
+
       <div *ngIf="inputForm.controls['email'].invalid && (inputForm.controls['email'].dirty || inputForm.controls['email'].touched)">
         <div *ngIf="inputForm.controls['email'].errors.required" class="msg-error">- Email harus diisi!</div>
         <div *ngIf="inputForm.controls['email'].errors.email" class="msg-error">- Format email harus benar!</div>
@@ -38,7 +45,7 @@
       <input type="password" id="confirm_password" placeholder="Confirm Password" [formControl]="inputForm.controls['confirm_password']" [class.input-error]="!inputForm.controls['confirm_password'].valid && inputForm.controls['confirm_password'].touched"/>
       <div *ngIf="inputForm.controls['confirm_password'].invalid && (inputForm.controls['confirm_password'].dirty || inputForm.controls['confirm_password'].touched)">
         <div *ngIf="inputForm.controls['confirm_password'].errors.required" class="msg-error">- Confirm Password harus diisi!</div>
-        <div *ngIf="inputForm.controls['confirm_password'].errors.NoPasswordMatch" class="msg-error">- Confirm Password tidak sama dengan Password!</div>
+        <div *ngIf="inputForm.controls['confirm_password'].errors.isPasswordMismatch" class="msg-error">- Confirm Password tidak sama dengan Password!</div>
       </div>  
     </div>
     <div class="input-field">
@@ -57,6 +64,9 @@
       </div>  
     </div>
     <button *ngIf="!inputForm.valid" class="btn btn-save" type="submit" disabled>Save</button>
-    <button *ngIf="inputForm.valid" class="btn btn-save" type="submit">Save</button>
+    <button *ngIf="inputForm.valid" class="btn btn-save" type="submit">
+      <span *ngIf="dataToEdit===null">Save</span>
+      <span *ngIf="dataToEdit!==null">Edit</span>
+    </button>
   </form>
 </div>

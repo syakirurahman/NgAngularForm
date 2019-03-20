@@ -7,25 +7,25 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 })
 export class DataviewComponent implements OnInit {
   @Input() data: Array<object[]>;
-  dataview:Array<any>;
+  @Output() onEditClicked: EventEmitter<object[]>;
+  @Output() onDeleteClicked: EventEmitter<object[]>;
+  deletedMessage:boolean;
   constructor() { 
-
+    this.onEditClicked = new EventEmitter();
+    this.onDeleteClicked = new EventEmitter();
+    this.deletedMessage = false;
   }
 
   ngOnInit() {
-    this.dataview = this.data;
   }
-  editData(email:string) {
-
+  editData(user:object[]) {
+    this.onEditClicked.emit(user);
   }
-  deleteData(email:string) {
+  deleteData(user:object[]) {
     let confirm = window.confirm('Apakah anda yakin ?'); 
     if(confirm == true) {
-      if(this.dataview.length!==0) {
-        let itemindex = this.dataview.findIndex(data => data.email === email);
-        this.dataview.splice(itemindex,1);
-        alert('Data telah dihapus!');
-      }
+      this.onDeleteClicked.emit(user);
+      this.deletedMessage = true;
     }
   }
 
