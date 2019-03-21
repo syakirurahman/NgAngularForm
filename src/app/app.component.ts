@@ -1,16 +1,8 @@
-import { Component } from '@angular/core';
-
-const dummy = {
-  email : 'syakirurohman@gadd.com',
-  first_name : 'Syakir',
-  last_name : 'rahmanm',
-  password : '123asd.',
-  confirm_password : '123asd.',
-  address : '123asd.',
-  phone_number : '+62298347983'
-}
+import { Component, OnInit, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 interface UserData {
+  id:number,
   email:string,
   first_name:string,
   last_name:string,
@@ -26,33 +18,39 @@ interface UserData {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Angular Form';
+  title = 'Learning Angular Form';
   
   activePage:string;
-  data:Array<any>;
-  dataToEdit: UserData;
-  constructor() {
+  data:UserData[];
+  dataToEdit: number;
+  constructor(
+    private http: HttpClient, 
+    @Inject('API_URL') private ApiUrl: string) {
 //    this.data = [];
-    this.data = [dummy];
+    this.data = [];
     this.activePage = 'browse';
-    this.dataToEdit = null;
+    this.dataToEdit = 0;
+  }
+
+  ngOnInit() {
+    this.getUsers();
+  }
+
+  getUsers() {
+    this.http.get(this.ApiUrl+'/users')
+      .subscribe(
+        (users:UserData[]) => { this.data = users }
+      );
   }
   navigatePage(page:string) {
     this.activePage = page;
   }
-  catchDataToEdit(cathedData:UserData) {
+  catchDataToEdit(cathedData:number) {
     this.navigatePage('input');
     this.dataToEdit = cathedData;
   }
   catchDataToDelete(cathedData:UserData) {
     let itemindex = this.data.findIndex(data => data.email === cathedData.email);
     this.data.splice(itemindex,1);
-  }
-  addData(dataSent: UserData) {
-    this.data.push(dataSent);
-  }
-  modifyData(dataSent: UserData) {
-    let itemindex = this.data.findIndex(data => data.email === dataSent.email);
-    this.data[itemindex] = dataSent;
   }
 }

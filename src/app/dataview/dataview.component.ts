@@ -7,8 +7,8 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 })
 export class DataviewComponent implements OnInit {
   @Input() data: Array<object[]>;
-  @Output() onEditClicked: EventEmitter<object[]>;
-  @Output() onDeleteClicked: EventEmitter<object[]>;
+  @Output() onEditClicked: EventEmitter<number>;
+  @Output() onDeleteClicked: EventEmitter<number>;
   deletedMessage:boolean;
   constructor() { 
     this.onEditClicked = new EventEmitter();
@@ -18,10 +18,10 @@ export class DataviewComponent implements OnInit {
 
   ngOnInit() {
   }
-  editData(user:object[]) {
+  editData(user:number) {
     this.onEditClicked.emit(user);
   }
-  deleteData(user:object[]) {
+  deleteData(user:number) {
     let confirm = window.confirm('Apakah anda yakin ?'); 
     if(confirm == true) {
       this.onDeleteClicked.emit(user);

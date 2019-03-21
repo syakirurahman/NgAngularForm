@@ -3,12 +3,19 @@
     <div class="input-field">
       <label for="email">Email</label>
       <input 
-        *ngIf="dataToEdit!==null" 
+        *ngIf="dataToEdit!==0" 
         readonly type="text" 
-        id="email" placeholder="Email" 
+        id="email" placeholder="Email"
         [formControl]="inputForm.controls['email']" 
-        [class.input-error]="!inputForm.controls['email'].valid && inputForm.controls['email'].touched"/>
-      <input *ngIf="dataToEdit===null" type="text" id="email" placeholder="Email" [formControl]="inputForm.controls['email']" [class.input-error]="!inputForm.controls['email'].valid && inputForm.controls['email'].touched"/>
+        [class.input-error]="!inputForm.controls['email'].valid && inputForm.controls['email'].touched"
+        />
+      <input 
+        *ngIf="dataToEdit===0" 
+        type="text" id="email" 
+        placeholder="Email" 
+        [formControl]="inputForm.controls['email']" 
+        [class.input-error]="!inputForm.controls['email'].valid && inputForm.controls['email'].touched"
+        />
 
       <div *ngIf="inputForm.controls['email'].invalid && (inputForm.controls['email'].dirty || inputForm.controls['email'].touched)">
         <div *ngIf="inputForm.controls['email'].errors.required" class="msg-error">- Email harus diisi!</div>

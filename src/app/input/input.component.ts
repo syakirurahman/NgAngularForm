@@ -1,5 +1,17 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { AbstractControl,FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, EventEmitter, Input, Output, Inject } from '@angular/core';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+
+interface UserData {
+  id:number,
+  email:string,
+  first_name:string,
+  last_name:string,
+  password:string,
+  confirm_password:string,
+  address:string,
+  phone_number:string
+}
 
 @Component({
   selector: 'app-input',
@@ -7,24 +19,16 @@ import { AbstractControl,FormControl, FormBuilder, FormGroup, Validators } from 
   styleUrls: ['./input.component.scss']
 })
 export class InputComponent implements OnInit {
-  @Output() onDataSubmited: EventEmitter<object[]>;
-  @Output() onDataEdited: EventEmitter<object[]>;
-  @Input() dataToEdit: {
-    email:string,
-    first_name:string,
-    last_name:string,
-    password:string,
-    confirm_password:string,
-    address:string,
-    phone_number:string
-  };
+  @Input() dataToEdit: number;
   inputForm: FormGroup;
-  data: object[];
-  constructor() {
-    this.onDataSubmited = new EventEmitter();
-    this.onDataEdited = new EventEmitter();
-    this.dataToEdit = null;
+  data: UserData[];
+  constructor(
+    private http: HttpClient,
+    @Inject('API_URL') private ApiUrl: string
+    ) {
+    this.dataToEdit = 0;
     this.inputForm = new FormGroup({
+//      'id':new FormControl(this.dataToEdit),
       'email': new FormControl('', [Validators.required, Validators.email]),
       'first_name': new FormControl('', Validators.required),
       'last_name': new FormControl('', Validators.required),
@@ -36,24 +40,40 @@ export class InputComponent implements OnInit {
   }
 
   ngOnInit() {  
-    if(this.dataToEdit!==null) {
-      this.inputForm.get('email').setValue(this.dataToEdit.email);
-      this.inputForm.get('first_name').setValue(this.dataToEdit.first_name);
-      this.inputForm.get('last_name').setValue(this.dataToEdit.last_name);
-      this.inputForm.get('password').setValue(this.dataToEdit.password);
-      this.inputForm.get('confirm_password').setValue(this.dataToEdit.confirm_password);
-      this.inputForm.get('address').setValue(this.dataToEdit.address);
-      this.inputForm.get('phone_number').setValue(this.dataToEdit.phone_number);
+    if(this.dataToEdit!==0) {
+      this.getUser(this.dataToEdit);
     }
   }
 
-  onSubmit(data:object[]) {
-    this.data = data;
-    if(this.dataToEdit!==null) {
-      this.onDataEdited.emit(data);
+  getUser(id:number) {
+    this.http.get(this.ApiUrl+'/users/'+id)
+    .subscribe((User:UserData) => {
+      this.inputForm.get('email').setValue(User.email);
+      this.inputForm.get('first_name').setValue(User.first_name);
+      this.inputForm.get('last_name').setValue(User.last_name);
+      this.inputForm.get('password').setValue(User.password);
+      this.inputForm.get('confirm_password').setValue(User.confirm_password);
+      this.inputForm.get('address').setValue(User.address);
+      this.inputForm.get('phone_number').setValue(User.phone_number);
+    });
+  }
+
+  updateUser(id:number, user:UserData) {
+    this.http.put(
+      this.ApiUrl+'/users/'+id,
+      user
+    )
+    .subscribe( response => {
+      console.log(response);
+    });
+  }
+
+  onSubmit(data:UserData) {
+    console.log(data)
+    if(this.dataToEdit!==0) {
+      this.updateUser(this.dataToEdit,data);
       alert('Data berhasil diedit');
     } else {
-      this.onDataSubmited.emit(data);
       alert('Data berhasil diinput');
     }
 //    this.inputForm.reset();
@@ -65,8 +85,7 @@ export class InputComponent implements OnInit {
       confirm_password:'',
       address:'',
       phone_number:''
-    }
-    );
+    });
   }
 }
 
