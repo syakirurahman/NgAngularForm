@@ -11,7 +11,10 @@
     </div>
   </div>
   <div class="main-block" [ngSwitch]="activePage">
-    <div *ngSwitchCase="'browse'"><app-dataview [data]="data" (onEditClicked)="catchDataToEdit($event)" (onDeleteClicked)="catchDataToDelete($event)"></app-dataview></div>
+    <div *ngSwitchCase="'browse'">
+      <app-filter></app-filter>
+      <app-dataview (onEditClicked)="catchDataToEdit($event)"></app-dataview>
+    </div>
     <div *ngSwitchCase="'input'"><app-input [dataToEdit]="dataToEdit"></app-input></div>  
   </div>
 </div>

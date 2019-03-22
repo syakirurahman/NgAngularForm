@@ -1,16 +1,12 @@
 <div class="input-form">
   <form [formGroup]="inputForm" (ngSubmit)="onSubmit(inputForm.value)" class="ui form">
     <div class="input-field">
+      <input 
+        type="hidden" 
+        [formControl]="inputForm.controls['id']"
+        />
       <label for="email">Email</label>
       <input 
-        *ngIf="dataToEdit!==0" 
-        readonly type="text" 
-        id="email" placeholder="Email"
-        [formControl]="inputForm.controls['email']" 
-        [class.input-error]="!inputForm.controls['email'].valid && inputForm.controls['email'].touched"
-        />
-      <input 
-        *ngIf="dataToEdit===0" 
         type="text" id="email" 
         placeholder="Email" 
         [formControl]="inputForm.controls['email']" 
@@ -72,8 +68,8 @@
     </div>
     <button *ngIf="!inputForm.valid" class="btn btn-save" type="submit" disabled>Save</button>
     <button *ngIf="inputForm.valid" class="btn btn-save" type="submit">
-      <span *ngIf="dataToEdit===null">Save</span>
-      <span *ngIf="dataToEdit!==null">Edit</span>
+      <span *ngIf="dataToEdit===0">Save</span>
+      <span *ngIf="dataToEdit!==0">Edit</span>
     </button>
   </form>
 </div>

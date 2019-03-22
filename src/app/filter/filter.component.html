@@ -1,0 +1,41 @@
+<div class="filter-form">
+    <form [formGroup]="filterForm" (ngSubmit)="onSubmit(filterForm.value)" class="ui form">
+      <div class="input-field">
+        <label for="email">Email</label>
+        <input 
+          type="text" id="email" 
+          placeholder="Email" 
+          [formControl]="email" 
+          />
+      </div>
+      <div class="input-field">
+        <label for="phone_number">Phone Number</label>
+        <input 
+          type="text" 
+          id="phone_number" 
+          placeholder="Phone Number" 
+          [formControl]="phone_number"
+        />
+      </div>        
+      <div class="input-field">
+        <label for="first_name">First Name</label>
+        <input 
+          type="text" 
+          id="first_name" 
+          placeholder="First Name" 
+          [formControl]="first_name" 
+        />
+      </div>
+      <div class="input-field">
+        <label for="last_name">Last Name</label>
+        <input 
+          type="text" 
+          id="last_name" 
+          placeholder="Last Name" 
+          [formControl]="last_name" 
+        />
+      </div>
+      <button  class="btn btn-filter" type="submit">Filter</button>
+    </form>
+  </div>
+  
